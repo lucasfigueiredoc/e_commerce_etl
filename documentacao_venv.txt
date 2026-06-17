@@ -1,0 +1,209 @@
+# Python Virtual Environment (venv) - Guia Rápido
+
+## O que é um venv?
+
+Um ambiente virtual (venv) é uma instalação isolada do Python para um projeto específico.
+
+Vantagens:
+
+* Evita conflitos entre bibliotecas de projetos diferentes.
+* Permite controlar versões de dependências.
+* Facilita compartilhamento e reprodução do ambiente.
+
+---
+
+# Criar um ambiente virtual
+
+Na pasta do projeto:
+
+```bash
+python -m venv venv
+```
+
+Será criada uma pasta chamada:
+
+```text
+projeto/
+├── venv/
+```
+
+---
+
+# Ativar o ambiente virtual
+
+## Windows (PowerShell)
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+## Windows (CMD)
+
+```cmd
+venv\Scripts\activate.bat
+```
+
+## Linux / Mac
+
+```bash
+source venv/bin/activate
+```
+
+Quando ativado, aparecerá algo semelhante a:
+
+```text
+(venv) PS C:\Projeto>
+```
+
+---
+
+# Desativar o ambiente virtual
+
+```bash
+deactivate
+```
+
+---
+
+# Instalar uma biblioteca
+
+Exemplo:
+
+```bash
+pip install pandas
+```
+
+Instalar múltiplas bibliotecas:
+
+```bash
+pip install pandas numpy pyodbc
+```
+
+---
+
+# Ver bibliotecas instaladas
+
+```bash
+pip list
+```
+
+---
+
+# Gerar arquivo de dependências
+
+Após instalar todas as bibliotecas necessárias:
+
+```bash
+pip freeze > requirements.txt
+```
+
+Será criado:
+
+```text
+requirements.txt
+```
+
+Exemplo:
+
+```text
+pandas==2.3.0
+numpy==2.3.1
+pyodbc==5.2.0
+```
+
+---
+
+# Instalar dependências a partir do arquivo
+
+Quando outra pessoa baixar o projeto:
+
+1. Criar o venv:
+
+```bash
+python -m venv venv
+```
+
+2. Ativar o venv:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+3. Instalar dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# Atualizar o pip
+
+Recomendado após criar o ambiente:
+
+```bash
+python -m pip install --upgrade pip
+```
+
+---
+
+# Estrutura recomendada do projeto
+
+```text
+projeto/
+│
+├── venv/
+├── src/
+│   └── main.py
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
+
+---
+
+# Arquivo .gitignore
+
+Não envie o ambiente virtual para o Git.
+
+```gitignore
+venv/
+__pycache__/
+*.pyc
+.env
+```
+
+---
+
+# Fluxo Completo
+
+## Primeira vez
+
+```bash
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install pandas numpy pyodbc
+pip freeze > requirements.txt
+```
+
+## Em outro computador
+
+```bash
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+## Iniciar trabalho diário
+
+```bash
+.\venv\Scripts\Activate.ps1
+```
+
+## Encerrar
+
+```bash
+deactivate
+```

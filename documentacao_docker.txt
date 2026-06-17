@@ -1,0 +1,197 @@
+# Docker Compose - Comandos Essenciais
+
+## Subir os containers
+
+Inicia todos os serviços definidos no `docker-compose.yml`.
+
+```bash
+docker compose up -d
+```
+
+### O que faz?
+
+* Cria os containers caso não existam.
+* Inicia os containers.
+* Executa em segundo plano por causa do parâmetro `-d`.
+
+---
+
+## Ver containers em execução
+
+```bash
+docker ps
+```
+
+### O que faz?
+
+Lista todos os containers que estão rodando no momento.
+
+Exemplo de informações exibidas:
+
+* ID do container
+* Nome
+* Imagem utilizada
+* Status
+* Portas expostas
+
+---
+
+## Ver status dos serviços do Compose
+
+```bash
+docker compose ps
+```
+
+### O que faz?
+
+Mostra apenas os containers pertencentes ao projeto atual.
+
+---
+
+## Visualizar logs
+
+```bash
+docker compose logs
+```
+
+### O que faz?
+
+Exibe os logs gerados pelos containers.
+
+Útil para identificar:
+
+* Erros de inicialização
+* Falhas de conexão
+* Problemas de configuração
+
+---
+
+## Acompanhar logs em tempo real
+
+```bash
+docker compose logs -f
+```
+
+### O que faz?
+
+Exibe os logs continuamente enquanto o container está executando.
+
+Pressione `CTRL + C` para sair.
+
+---
+
+## Baixar ou atualizar imagens
+
+```bash
+docker compose pull
+```
+
+### O que faz?
+
+Baixa as imagens mais recentes definidas no `docker-compose.yml`.
+
+Utilize quando:
+
+* Alterar a tag de uma imagem.
+* Quiser atualizar para uma versão mais nova.
+
+---
+
+## Parar e remover containers
+
+```bash
+docker compose down
+```
+
+### O que faz?
+
+* Para os containers.
+* Remove os containers criados pelo Compose.
+* Mantém os volumes e imagens.
+
+---
+
+## Reiniciar os serviços
+
+```bash
+docker compose restart
+```
+
+### O que faz?
+
+Reinicia os containers sem recriá-los.
+
+---
+
+## Reconstruir containers após alteração
+
+```bash
+docker compose down
+docker compose pull
+docker compose up -d
+```
+
+### Quando utilizar?
+
+Após:
+
+* Alterar imagens.
+* Modificar variáveis de ambiente.
+* Alterar configurações do compose.
+
+---
+
+## Verificar uma imagem específica
+
+```bash
+docker pull nome-da-imagem
+```
+
+Exemplo:
+
+```bash
+docker pull quay.io/minio/minio:latest
+```
+
+### O que faz?
+
+Testa se a imagem existe e pode ser baixada.
+
+---
+
+# Fluxo de Trabalho Recomendado
+
+## Primeira execução
+
+```bash
+docker compose pull
+docker compose up -d
+docker ps
+```
+
+## Verificar problemas
+
+```bash
+docker compose logs -f
+```
+
+## Após alterar o compose
+
+```bash
+docker compose down
+docker compose pull
+docker compose up -d
+```
+
+---
+
+# Comandos que uso no dia a dia
+
+```bash
+docker compose up -d
+docker ps
+docker compose logs -f
+docker compose down
+```
+
+Esses quatro comandos resolvem a maior parte das tarefas de administração de containers em ambientes de desenvolvimento.
