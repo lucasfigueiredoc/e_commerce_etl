@@ -1,5 +1,13 @@
 version: '3.8'
 
+networks:
+  data_pipeline_net:
+    driver: bridge
+
+volumes:
+  minio_data:
+  postgres_data:
+
 services:
   # --- MINIO: SIMULADOR DE AZURE DATA LAKE / AWS S3 ---
   minio:
@@ -12,3 +20,19 @@ services:
       MINIO_ROOT_USER: admin_datalake
       MINIO_ROOT_PASSWORD: senha_datalake
     command: server /data --console-address ":9001"
+
+
+  # --- POSTGRESQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: pipeline_postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin_password
+      POSTGRES_DB: data_warehouse
+    ports:
+      - "5432:5432" # Porta padrão do banco de dados
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - data_pipeline_net
